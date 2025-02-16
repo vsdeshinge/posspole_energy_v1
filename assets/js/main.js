@@ -190,21 +190,26 @@ document.addEventListener("DOMContentLoaded", function () {
 (function() {
   "use strict";
 
-  /**
-   * Apply .scrolled class to the body as the page is scrolled down
-   */
   function toggleScrolled() {
     const selectBody = document.querySelector('body');
     const selectHeader = document.querySelector('#header');
-    if (!selectHeader.classList.contains('scroll-up-sticky') && 
-        !selectHeader.classList.contains('sticky-top') && 
-        !selectHeader.classList.contains('fixed-top')) return;
 
-    window.scrollY > 100 ? selectBody.classList.add('scrolled') : selectBody.classList.remove('scrolled');
-  }
+    // Check if the current page is index.html
+    if (window.location.pathname.endsWith("index.html")) {
+        if (!selectHeader.classList.contains('scroll-up-sticky') &&
+            !selectHeader.classList.contains('sticky-top') &&
+            !selectHeader.classList.contains('fixed-top')) return;
 
-  document.addEventListener('scroll', toggleScrolled);
-  window.addEventListener('load', toggleScrolled);
+        window.scrollY > 100 ? selectBody.classList.add('scrolled') : selectBody.classList.remove('scrolled');
+    } else {
+        // Ensure navbar stays black on other pages
+        selectBody.classList.add('scrolled');
+    }
+}
+
+// Apply only on index.html
+document.addEventListener('scroll', toggleScrolled);
+window.addEventListener('load', toggleScrolled);
 
   /**
    * Mobile nav toggle
@@ -401,3 +406,26 @@ document.addEventListener("DOMContentLoaded", function () {
   document.addEventListener('scroll', navmenuScrollspy);
 
 })();
+function toggleScrolled() {
+  const selectBody = document.querySelector('body');
+  const selectHeader = document.querySelector('#header');
+
+  // Get the page type from header's data attribute
+  let pageType = selectHeader.getAttribute('data-page');
+
+  if (pageType === "index") {
+      // Apply scroll effect only on index.html
+      if (!selectHeader.classList.contains('scroll-up-sticky') &&
+          !selectHeader.classList.contains('sticky-top') &&
+          !selectHeader.classList.contains('fixed-top')) return;
+
+      window.scrollY > 100 ? selectBody.classList.add('scrolled') : selectBody.classList.remove('scrolled');
+  } else {
+      // Ensure navbar stays black on other pages
+      selectBody.classList.add('scrolled'); // Forces black navbar
+  }
+}
+
+// Apply behavior on load and scroll
+document.addEventListener('scroll', toggleScrolled);
+window.addEventListener('load', toggleScrolled);

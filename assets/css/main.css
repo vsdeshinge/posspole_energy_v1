@@ -193,6 +193,28 @@ h6 {
   color: var(--default-color);
   background: var(--accent-color);
 }
+/* Default header styles */
+#header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  transition: background-color 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+/* Index Page: Transparent at start, black on scroll */
+[data-page="index"] {
+  background-color: transparent;
+}
+
+body.scrolled [data-page="index"] {
+  background-color: black !important;
+}
+
+/* Other Pages: Always black */
+[data-page="other"] {
+  background-color: black !important;
+}
 
 @media (max-width: 1200px) {
   .header .logo {

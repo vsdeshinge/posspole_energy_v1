@@ -136,6 +136,36 @@
 
     </div>
   </header>
+  <section id="biomass-energy" class="renewable-section">
+    <div class="container">
+      <div class="row align-items-center">
+        <!-- Image on the Left -->
+        <div class="col-lg-6">
+          <div class="image-container">
+            <img src="assets/img/hydro-electric.jpg" alt="Hydro Electric Power" class="img-fluid">
+          </div>
+        </div>
+        
+        <!-- Content on the Right -->
+        <div class="col-lg-6">
+          <div class="content-card">
+            <h2><i class="bi bi-droplet"></i> Hydro Electric Power</h2>
+            <p>
+              Hydroelectric power harnesses the energy of flowing water to generate electricity, providing a reliable and renewable energy source.
+              It plays a key role in reducing fossil fuel dependence and supporting sustainable development.
+            </p>
+            <ul class="benefits-list">
+              <li><i class="bi bi-lightning"></i> <strong>Reliable:</strong> Provides consistent and stable power generation.</li>
+              <li><i class="bi bi-tree"></i> <strong>Eco-Friendly:</strong> Produces no direct emissions and supports clean energy.</li>
+              <li><i class="bi bi-water"></i> <strong>Renewable:</strong> Uses the natural water cycle for energy generation.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+
 <footer id="footer" class="footer dark-background">
 
   <div class="footer-top">
@@ -213,7 +243,138 @@
   </div>
 
 </footer>
+<style>
 
+.renewable-section {
+    min-height: 90vh; /* Adjusted height */
+    display: flex;
+    align-items: center; /* Centers vertically */
+    justify-content: center; /* Centers horizontally */
+    padding: 50px 0; /* Adjusted spacing */
+    background-color: #f9f9f9;
+    margin-top: 30px; /* Small gap from navbar */
+}
+
+.image-container img {
+    width: 100%;
+    border-radius: 15px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.image-container img:hover {
+    transform: scale(1.05);
+}
+
+.content-card {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+.content-card:hover {
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.benefits-list {
+    list-style: none;
+    padding: 0;
+}
+
+.benefits-list li {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+.benefits-list i {
+    color: green;
+    margin-right: 10px;
+}
+
+.btn-learn-more {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 10px 22px;
+    background-color: #28a745;
+    color: white;
+    border-radius: 8px;
+    font-size: 15px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.btn-learn-more:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+@media (max-width: 1200px) {
+    .renewable-section {
+        padding: 40px 0; /* Reduce padding for larger screens */
+    }
+
+    .content-card {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 992px) {
+    .renewable-section {
+        padding: 30px 0; /* Adjust padding for tablets */
+    }
+
+    .content-card {
+        padding: 20px;
+    }
+
+    .benefits-list li {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 768px) {
+    .renewable-section {
+        flex-direction: column; /* Stack image and content vertically on small screens */
+        padding: 20px 0;
+    }
+
+    .image-container img {
+        max-width: 100%; /* Ensure images fit within container */
+        border-radius: 12px;
+    }
+
+    .content-card {
+        margin-top: 20px; /* Add margin between image and content */
+    }
+
+    .benefits-list li {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 576px) {
+    .renewable-section {
+        padding: 15px 0; /* Reduce padding for very small screens */
+    }
+
+    .content-card {
+        padding: 15px; /* Reduce padding for mobile */
+    }
+
+    .benefits-list li {
+        font-size: 12px;
+    }
+
+    .btn-learn-more {
+        font-size: 14px;
+        padding: 8px 20px;
+    }
+}
+</style>
+
+  </style>
+  
 <!-- Scroll Top -->
 <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
