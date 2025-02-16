@@ -284,51 +284,55 @@ body.scrolled [data-page="index"] {
 }
 
 /* Table Container-Modal */
+/* Modal Styles */
 .modal {
   display: none;
   position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
+  z-index: 1000;
+  inset: 0; /* Ensures full coverage without extra margins */
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Slightly darker backdrop */
+  background-color: rgba(0, 0, 0, 0.5); /* Dark backdrop */
+  display: flex;
   justify-content: center;
   align-items: center;
-  backdrop-filter: blur(15px); /* More refined glassmorphism effect */
-  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
   transition: all 0.3s ease-in-out;
 }
 
+/* Modal Content */
 .modal-content {
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 8px;
-  padding: 30px;
+  padding: 20px;
   color: #fff;
-  width: 60%; /* A more balanced width */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  width: 90%; /* More flexible width */
+  max-width: 600px; /* Prevents excessive width on larger screens */
   max-height: 80vh;
   overflow-y: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   animation: fadeIn 0.5s ease-in-out;
 }
 
+/* Fade-in Animation */
 @keyframes fadeIn {
-  0% { opacity: 0; transform: translateY(-30px); }
+  0% { opacity: 0; transform: translateY(-20px); }
   100% { opacity: 1; transform: translateY(0); }
 }
 
+/* Close Button */
 .close {
-  font-size: 30px;
+  font-size: 24px;
   color: #fff;
   cursor: pointer;
   position: absolute;
-  top: 10px;
-  right: 20px;
+  top: 15px;
+  right: 15px;
   transition: color 0.3s ease;
 }
 
 .close:hover {
-  color: #f44336; /* Red color on hover for a better visual effect */
+  color: #f44336;
 }
 
 /* Table Styles */
@@ -336,20 +340,17 @@ table {
   width: 100%;
   color: #fff;
   border-collapse: collapse;
-  margin-top: 20px;
+  margin-top: 15px;
 }
 
 table th, table td {
   text-align: left;
-  padding: 12px;
+  padding: 10px;
   border-bottom: 1px solid #ddd;
 }
 
 table th {
   background-color: #ffffff;
-  position: sticky;
-  top: 0;
-  z-index: 2; /* Ensure header stays on top */
   font-weight: bold;
 }
 
@@ -357,9 +358,24 @@ table td {
   background-color: #ffffff;
 }
 
-table td:first-child {
-  font-weight: 500;
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .modal-content {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .close {
+    font-size: 20px;
+    top: 10px;
+    right: 10px;
+  }
+
+  table th, table td {
+    padding: 8px;
+  }
 }
+
 /* Search Bar */
 
 .suggestions-box {
@@ -1088,10 +1104,11 @@ section,
 /*--------------------------------------------------------------
 # About Section
 --------------------------------------------------------------*/
-.about h2{
-  font-size: 1.8rem;
+/* About Section */
+.about h2, .clients h2 {
+  font-size: clamp(1.5rem, 2vw, 1.8rem);
   text-align: left;
-  color:#000000;
+  color: #000000;
 }
 
 .about .content .fst-italic {
@@ -1106,31 +1123,26 @@ section,
 .about .content ul li {
   padding: 10px 0 0 0;
   display: flex;
+  align-items: center; /* Ensures better alignment across devices */
 }
 
 .about .content ul i {
   color: var(--accent-color);
   margin-right: 0.5rem;
   line-height: 1.2;
-  font-size: 1.25rem;
+  font-size: clamp(1rem, 2vw, 1.25rem);
 }
 
 .about .content p:last-child {
   margin-bottom: 0;
 }
 
-/*--------------------------------------------------------------
-# Clients Section
---------------------------------------------------------------*/
-
-.clients h2{
-  font-size: 1.8rem;
-  text-align: left;
-  color:#000000;
-}
+/* Clients Section */
 .clients .swiper-slide img {
   opacity: 1;
   transition: 0.3s;
+  max-width: 100%;
+  height: auto; /* Ensures images scale proportionally */
 }
 
 .clients .swiper-slide img:hover {
@@ -1145,6 +1157,8 @@ section,
 .clients .swiper-pagination {
   margin-top: 20px;
   position: relative;
+  display: flex;
+  justify-content: center;
 }
 
 .clients .swiper-pagination .swiper-pagination-bullet {
@@ -1158,10 +1172,23 @@ section,
   background-color: var(--accent-color);
 }
 
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .about .content ul li {
+    flex-direction: column; /* Ensures proper alignment on smaller screens */
+    align-items: flex-start;
+  }
+
+  .about .content ul i {
+    margin-bottom: 5px;
+  }
+}
+
 /*--------------------------------------------------------------
 # Features Section
 --------------------------------------------------------------*/
-
+/* Features Section */
+/* Features Section */
 .features h2{
   font-size: 1.8rem;
   text-align: left;
@@ -1256,6 +1283,7 @@ section,
   transform: translateY(-10px);
 }
 
+
 /*--------------------------------------------------------------
 # Call To Action Section
 --------------------------------------------------------------*/
@@ -1318,14 +1346,17 @@ section,
   color: var(--background-color);
   border: 2px solid var(--accent-color);
 }
-.vision h2{
-  font-size: 1.8rem;
+/* Vision Section */
+.vision h2 {
+  font-size: clamp(1.5rem, 2vw, 1.8rem);
   text-align: left;
   margin-bottom: 5px !important;
-  color:#000000;
+  color: #000000;
 }
+
+/* Flip Card */
 .flip-card {
-    margin-top: 0px!important;
+  margin-top: 0px !important;
   background: transparent;
   width: 100%;
   max-width: 350px;
@@ -1333,13 +1364,6 @@ section,
   perspective: 1200px;
   margin: 0 auto;
 }
-.flip-card-front i {
-  font-size: 3rem; /* Adjust size */
-  color: rgb(0, 0, 0); /* Ensure visibility */
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6); /* Add shadow for contrast */
-  margin-bottom: 10px; /* Ensure spacing */
-}
-
 
 .flip-card-inner {
   position: relative;
@@ -1354,6 +1378,7 @@ section,
   transform: rotateY(180deg);
 }
 
+/* Front and Back Side */
 .flip-card-front,
 .flip-card-back {
   position: absolute;
@@ -1381,6 +1406,13 @@ section,
   justify-content: center;
 }
 
+.flip-card-front i {
+  font-size: clamp(2.5rem, 3vw, 3rem);
+  color: rgb(0, 0, 0);
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+  margin-bottom: 10px;
+}
+
 /* Back Side */
 .flip-card-back {
   background: #ffffff;
@@ -1388,14 +1420,14 @@ section,
   color: #333;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Ensures all content is properly centered */
+  justify-content: center;
   padding: 20px;
 }
 
 /* Profile Image */
 .profile-img {
-  width: 120px;
-  height: 120px;
+  width: clamp(100px, 30%, 120px);
+  height: clamp(100px, 30%, 120px);
   border-radius: 50%;
   object-fit: cover;
   border: 4px solid #f1f1f1;
@@ -1404,14 +1436,14 @@ section,
 
 /* Heading */
 .flip-card-back h3 {
-  font-size: 22px;
+  font-size: clamp(18px, 2vw, 22px);
   font-weight: 600;
-  margin-bottom: 5px; /* Reduced space */
+  margin-bottom: 5px;
 }
 
 /* List */
 .flip-card-back ul {
-  list-style: none; /* Removes bullet points */
+  list-style: none;
   padding: 0;
   margin: 0;
   text-align: center;
@@ -1419,10 +1451,10 @@ section,
 
 /* List Items */
 .flip-card-back ul li {
-  font-size: 16px;
+  font-size: clamp(14px, 1.8vw, 16px);
   line-height: 1.4;
   color: #555;
-  padding: 3px 0; /* Keeps spacing minimal */
+  padding: 3px 0;
 }
 
 /* Social Icons */
@@ -1434,7 +1466,7 @@ section,
 
 .social-icons a {
   color: #444;
-  font-size: 22px;
+  font-size: clamp(20px, 2vw, 22px);
   transition: color 0.3s ease, transform 0.2s ease;
 }
 
@@ -1443,7 +1475,7 @@ section,
   transform: scale(1.1);
 }
 
-/* Responsive */
+/* Responsive Design */
 @media (max-width: 400px) {
   .flip-card {
     max-width: 300px;
@@ -1467,6 +1499,7 @@ section,
     font-size: 20px;
   }
 }
+
 
 
 /*--------------------------------------------------------------
@@ -1593,11 +1626,13 @@ section,
 /*--------------------------------------------------------------
 # Team Section
 --------------------------------------------------------------*/
-.team h2{
-  font-size: 1.8rem;
+/* Team Section */
+.team h2 {
+  font-size: clamp(1.5rem, 2vw, 1.8rem);
   text-align: left;
-  color:#000000;
+  color: #000000;
 }
+
 /* General Team Member Styling */
 .team-member {
   background: #ffffff;
@@ -1619,7 +1654,7 @@ section,
 
 /* Image Styling */
 .member-img {
-  max-width: 150px;
+  max-width: clamp(120px, 20vw, 150px);
 }
 
 .member-img img {
@@ -1629,13 +1664,13 @@ section,
 
 /* Member Info Styling */
 .member-info h4 {
-  font-size: 22px;
+  font-size: clamp(18px, 2vw, 22px);
   margin-bottom: 5px;
   font-weight: bold;
 }
 
 .member-info span {
-  font-size: 16px;
+  font-size: clamp(14px, 1.8vw, 16px);
   color: gray;
 }
 
@@ -1648,7 +1683,7 @@ section,
   display: inline-block;
   margin-right: 8px;
   color: #333;
-  font-size: 18px;
+  font-size: clamp(16px, 2vw, 18px);
   transition: color 0.3s;
 }
 
@@ -1659,7 +1694,7 @@ section,
 /* Responsive */
 @media (max-width: 768px) {
   .team-member {
-      flex-direction: column;
+    flex-direction: column;
   }
 }
 

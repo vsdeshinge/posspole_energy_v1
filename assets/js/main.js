@@ -47,20 +47,27 @@ const projectData = {
 function showTable(type) {
   const tableBody = document.getElementById("tableBody");
   const tableTitle = document.getElementById("tableTitle");
-  tableBody.innerHTML = "";
-  tableTitle.innerText = type.replace(/([A-Z])/g, ' $1').trim(); // Format title
+  const modal = document.getElementById("popupModal");
 
-  projectData[type].forEach(project => {
-      let row = `<tr>
+  if (!projectData[type] || projectData[type].length === 0) {
+      console.warn("No data found for:", type);
+      return;
+  }
+
+  tableTitle.innerText = type.replace(/([A-Z])/g, " $1").trim(); // Format title
+
+  // Create rows efficiently using map().join("")
+  tableBody.innerHTML = projectData[type].map(project => `
+      <tr>
           <td>${project.customerName}</td>
           <td>${project.natureOfWork}</td>
           <td>${project.workLocation}</td>
           <td>${project.year}</td>
-      </tr>`;
-      tableBody.innerHTML += row;
-  });
+      </tr>
+  `).join("");
 
-  document.getElementById("popupModal").style.display = "flex";
+  // Show the modal
+  modal.style.display = "flex";
 }
 
 // Function to Close the Modal
@@ -69,13 +76,19 @@ function closeModal() {
 }
 
 // Close the modal if user clicks outside the content
-window.onclick = function(event) {
-  let modal = document.getElementById("popupModal");
+document.addEventListener("click", function (event) {
+  const modal = document.getElementById("popupModal");
+  const modalContent = modal.querySelector(".modal-content");
+  
   if (event.target === modal) {
-      modal.style.display = "none";
+      closeModal();
   }
-}
+});
+
+// Ensure the modal is hidden on page load
 document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("popupModal").style.display = "none";
+
   document.querySelectorAll(".dropdown > a").forEach((dropdownLink) => {
       dropdownLink.addEventListener("click", function (event) {
           event.preventDefault(); // Prevent default anchor behavior
@@ -93,11 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
           });
 
           // Toggle the clicked dropdown
-          if (!isOpen) {
-              parentDropdown.classList.add("active");
-          } else {
-              parentDropdown.classList.remove("active");
-          }
+          parentDropdown.classList.toggle("active", !isOpen);
       });
   });
 
