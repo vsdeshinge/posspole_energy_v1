@@ -75,6 +75,43 @@ window.onclick = function(event) {
       modal.style.display = "none";
   }
 }
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll(".dropdown > a").forEach((dropdownLink) => {
+      dropdownLink.addEventListener("click", function (event) {
+          event.preventDefault(); // Prevent default anchor behavior
+
+          let dropdownMenu = this.nextElementSibling; // Get the dropdown menu (ul)
+          let parentDropdown = this.parentElement; // Get the parent <li>
+
+          let isOpen = parentDropdown.classList.contains("active");
+
+          // Close other open dropdowns
+          document.querySelectorAll(".dropdown").forEach((item) => {
+              if (item !== parentDropdown) {
+                  item.classList.remove("active");
+              }
+          });
+
+          // Toggle the clicked dropdown
+          if (!isOpen) {
+              parentDropdown.classList.add("active");
+          } else {
+              parentDropdown.classList.remove("active");
+          }
+      });
+  });
+
+  // Close dropdowns when clicking outside
+  document.addEventListener("click", function (event) {
+      let isClickInside = event.target.closest(".navmenu");
+      if (!isClickInside) {
+          document.querySelectorAll(".dropdown").forEach((item) => {
+              item.classList.remove("active");
+          });
+      }
+  });
+});
+
 
   const searchContainer = document.querySelector(".search-container");
   const searchBar = document.querySelector(".search-input"); // Updated to select by class
